@@ -702,20 +702,22 @@ header p#result-count {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  padding: 6px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0;
   transition: all 0.2s;
   font-size: 0.95rem;
 }
+.champ-filter-item:last-child {
+  border-bottom: none;
+}
 .champ-filter-item[data-state='inc'] {
-  background: rgba(34, 197, 94, 0.1);
-  border-color: #22c55e;
+  background: transparent;
 }
 .champ-filter-item[data-state='exc'] {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: #ef4444;
+  background: transparent;
 }
 .champ-name {
   flex-grow: 1;
@@ -748,19 +750,25 @@ header p#result-count {
 .champ-btn:hover {
   background: var(--hover-overlay);
 }
-.champ-btn.btn-inc {
-  color: #22c55e;
+.champ-btn {
+  opacity: 0.3;
+}
+.champ-btn:hover {
+  background: transparent;
+  opacity: 0.8;
+  transform: scale(1.1);
 }
 .champ-btn.btn-inc.active {
-  background: #22c55e;
-  color: white;
-}
-.champ-btn.btn-exc {
-  color: #ef4444;
+  color: #22c55e;
+  opacity: 1;
+  transform: scale(1.3);
+  text-shadow: 0 0 8px rgba(34,197,94,0.4);
 }
 .champ-btn.btn-exc.active {
-  background: #ef4444;
-  color: white;
+  color: #ef4444;
+  opacity: 1;
+  transform: scale(1.3);
+  text-shadow: 0 0 8px rgba(239,68,68,0.4);
 }
 
 
