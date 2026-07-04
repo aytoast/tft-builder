@@ -127,7 +127,7 @@ async function loadData(season) {
       wrapper.className = 'emblem-counter';
       
       const label = document.createElement('span');
-      label.textContent = `+1 ${emb}`;
+      label.textContent = emb;
       
       const controls = document.createElement('div');
       controls.className = 'counter-controls';
@@ -352,7 +352,7 @@ function updateActiveFiltersUI() {
         // Re-render emblem counters to reset to 0
         const counterSpans = document.querySelectorAll('.emblem-counter span');
         counterSpans.forEach(span => {
-            if (span.textContent === `+1 ${val}`) {
+            if (span.textContent === val) {
                 span.nextElementSibling.querySelector('span').textContent = '0';
             }
         });
