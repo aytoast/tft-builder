@@ -289,38 +289,67 @@ function renderFilters() {
   champContainer.innerHTML = '';
   allData.champions.forEach(champ => {
     const label = document.createElement('div');
-    label.className = 'tri-state-label';
+    label.className = 'champ-filter-item';
     let state = selectedChamps.has(champ) ? 'inc' : (excludedChamps.has(champ) ? 'exc' : 'none');
     label.dataset.state = state;
     
-    const icon = document.createElement('span');
-    icon.className = 'tri-icon';
-    if (state === 'inc') icon.textContent = '✓';
-    else if (state === 'exc') icon.textContent = '✗';
-    else icon.textContent = '';
-
     const text = document.createElement('span');
+    text.className = 'champ-name';
     text.textContent = champ;
+
+    const actions = document.createElement('div');
+    actions.className = 'champ-actions';
+
+    const btnInc = document.createElement('button');
+    btnInc.className = 'champ-btn btn-inc';
+    btnInc.textContent = '✓';
+    if(state === 'inc') btnInc.classList.add('active');
     
-    label.title = '点击选中(✓)，再点一次排除(✗)';
+    const btnExc = document.createElement('button');
+    btnExc.className = 'champ-btn btn-exc';
+    btnExc.textContent = '✗';
+    if(state === 'exc') btnExc.classList.add('active');
 
-    label.appendChild(icon);
-    label.appendChild(text);
-
-    label.addEventListener('click', () => {
-        if (state === 'none') {
-            selectedChamps.add(champ);
-        } else if (state === 'inc') {
+    btnInc.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (state === 'inc') {
             selectedChamps.delete(champ);
-            excludedChamps.add(champ);
+            state = 'none';
         } else {
+            selectedChamps.add(champ);
             excludedChamps.delete(champ);
+            state = 'inc';
         }
-        renderFilters(); 
+        updateUI();
+    });
+
+    btnExc.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (state === 'exc') {
+            excludedChamps.delete(champ);
+            state = 'none';
+        } else {
+            excludedChamps.add(champ);
+            selectedChamps.delete(champ);
+            state = 'exc';
+        }
+        updateUI();
+    });
+
+    function updateUI() {
+        label.dataset.state = state;
+        if(state === 'inc') { btnInc.classList.add('active'); btnExc.classList.remove('active'); }
+        else if(state === 'exc') { btnExc.classList.add('active'); btnInc.classList.remove('active'); }
+        else { btnInc.classList.remove('active'); btnExc.classList.remove('active'); }
         renderCombinations();
         updateActiveFiltersUI();
-    });
-    
+    }
+
+    actions.appendChild(btnInc);
+    actions.appendChild(btnExc);
+    label.appendChild(text);
+    label.appendChild(actions);
+
     champContainer.appendChild(label);
   });
 }
