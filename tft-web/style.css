@@ -698,35 +698,69 @@ header p#result-count {
   color: white;
 }
 
-.tri-state-label {
+.champ-filter-item {
   display: flex;
   align-items: center;
-  padding: 8px 12px;
+  justify-content: space-between;
+  padding: 4px 10px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  cursor: pointer;
-  user-select: none;
   transition: all 0.2s;
   font-size: 0.95rem;
 }
-.tri-state-label .tri-icon {
-  width: 16px;
-  font-weight: bold;
-  margin-right: 6px;
-}
-.tri-state-label[data-state='none'] {
-  color: var(--text-secondary);
-}
-.tri-state-label[data-state='inc'] {
+.champ-filter-item[data-state='inc'] {
   background: rgba(34, 197, 94, 0.1);
   border-color: #22c55e;
-  color: #22c55e;
 }
-.tri-state-label[data-state='exc'] {
+.champ-filter-item[data-state='exc'] {
   background: rgba(239, 68, 68, 0.1);
   border-color: #ef4444;
+}
+.champ-name {
+  flex-grow: 1;
+  color: var(--text-secondary);
+}
+.champ-filter-item[data-state='inc'] .champ-name {
+  color: #22c55e;
+}
+.champ-filter-item[data-state='exc'] .champ-name {
   color: #ef4444;
+}
+.champ-actions {
+  display: flex;
+  gap: 4px;
+}
+.champ-btn {
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-weight: bold;
+  transition: all 0.2s;
+}
+.champ-btn:hover {
+  background: var(--hover-overlay);
+}
+.champ-btn.btn-inc {
+  color: #22c55e;
+}
+.champ-btn.btn-inc.active {
+  background: #22c55e;
+  color: white;
+}
+.champ-btn.btn-exc {
+  color: #ef4444;
+}
+.champ-btn.btn-exc.active {
+  background: #ef4444;
+  color: white;
 }
 
 
