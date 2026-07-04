@@ -8,6 +8,7 @@ let starredCombos = new Set(JSON.parse(localStorage.getItem('tft-stars') || '[]'
 let showStarredOnly = false;
 let currentSeason = '8';
 let currentPopFilter = 'all';
+let seasonDataCache = {};
 
 // Pagination state
 let currentRenderIndex = 0;
@@ -90,9 +91,14 @@ async function loadData(season) {
     
     const maxPop = season == 8 ? 9 : 10;
     document.getElementById('main-title').textContent = `最高${maxPop}人口成型阵容库 (Set ${season})`;
-    
-    const res = await fetch(`/data_s${season}.json`);
-    allData = await res.json();
+
+    if (seasonDataCache[season]) {
+      allData = seasonDataCache[season];
+    } else {
+      const res = await fetch(`/data_s${season}.json?v=` + Date.now());
+      allData = await res.json();
+      seasonDataCache[season] = allData;
+    }
     
     // Clear filters
     selectedTraits.clear();
