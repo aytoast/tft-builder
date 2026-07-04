@@ -301,6 +301,8 @@ function renderFilters() {
 
     const text = document.createElement('span');
     text.textContent = champ;
+    
+    label.title = '点击选中(✓)，再点一次排除(✗)';
 
     label.appendChild(icon);
     label.appendChild(text);

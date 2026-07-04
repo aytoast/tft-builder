@@ -729,3 +729,5 @@ header p#result-count {
   color: #ef4444;
 }
 
+
+.filter-hint { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; opacity: 0.8; margin-top: -4px; }
