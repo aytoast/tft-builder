@@ -92,6 +92,14 @@ async function loadData(season) {
     const maxPop = season == 8 ? 9 : 10;
     document.getElementById('main-title').textContent = `最高${maxPop}人口成型阵容库 (Set ${season})`;
 
+    // Hide or show population buttons based on maxPop
+    document.querySelectorAll('.pop-btn').forEach(btn => {
+      const popVal = parseInt(btn.dataset.pop);
+      if (!isNaN(popVal)) {
+        btn.style.display = popVal > maxPop ? 'none' : 'inline-block';
+      }
+    });
+
     if (seasonDataCache[season]) {
       allData = seasonDataCache[season];
     } else {
@@ -103,9 +111,16 @@ async function loadData(season) {
     // Clear filters
     selectedTraits.clear();
     selectedChamps.clear();
+    excludedChamps.clear();
     selectedEmblems = {};
     const searchInputs = document.querySelectorAll('.search-input');
     searchInputs.forEach(input => input.value = '');
+    
+    // Reset population filter
+    currentPopFilter = 'all';
+    document.querySelectorAll('.pop-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.pop === 'all');
+    });
     
     // Clear DOM containers
     document.getElementById('trait-filters').innerHTML = '';
@@ -490,7 +505,8 @@ function renderCombinations() {
     });
   } else {
     // If sorting by cost, don't group by population so high-cost are globally at the top
-    currentRenderList.push({ type: 'header', pop: '所有', count: filtered.length });
+    const headerPopText = currentPopFilter === 'all' ? '所有' : currentPopFilter;
+    currentRenderList.push({ type: 'header', pop: headerPopText, count: filtered.length });
     filtered.forEach(comp => currentRenderList.push({ type: 'comp', comp: comp }));
   }
 
