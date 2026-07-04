@@ -229,7 +229,7 @@ function setupSearch() {
   const champSearch = document.getElementById('champ-search');
   champSearch.addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase();
-    const labels = document.querySelectorAll('#champ-filters .checkbox-label');
+    const labels = document.querySelectorAll('#champ-filters .champ-filter-item');
     labels.forEach(lbl => {
       lbl.style.display = lbl.textContent.toLowerCase().includes(term) ? 'flex' : 'none';
     });
