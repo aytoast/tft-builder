@@ -206,6 +206,7 @@ async function loadData(season) {
 async function init() {
   setupSearch();
   setupControls();
+  setupTabs();
   
   const sentinel = document.getElementById('load-more-sentinel');
   if (sentinel) {
@@ -276,6 +277,25 @@ function setupControls() {
     document.getElementById('trait-search').value = '';
     renderFilters();
     renderCombinations();
+  });
+}
+
+function setupTabs() {
+  const tabs = document.querySelectorAll('.nav-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      tabs.forEach(t => t.classList.remove('active'));
+      e.target.classList.add('active');
+      
+      const targetId = e.target.dataset.target;
+      document.querySelectorAll('.view-container').forEach(view => {
+        view.style.display = view.id === targetId ? 'block' : 'none';
+      });
+      
+      if (targetId === 'builder-view' && window.refreshBuilder) {
+        window.refreshBuilder();
+      }
+    });
   });
 }
 
@@ -435,7 +455,9 @@ function renderCombinations() {
     // Check population filter
     if (currentPopFilter !== 'all') {
       const popSize = comp.population || comp.champions.length;
-      if (popSize !== parseInt(currentPopFilter)) return false;
+      const extraPop = (comp.deficits || []).filter(d => d === '+1 人口').length;
+      const basePopRequired = popSize - extraPop;
+      if (basePopRequired !== parseInt(currentPopFilter)) return false;
     }
 
     const compTraitNames = comp.traits.map(t => t.name);
