@@ -49,12 +49,12 @@ def run():
         for t in d['traits']:
             trait_to_champs.setdefault(t, []).append(c)
 
-    perfect_comps_by_pop = {i: set() for i in range(4, 11)}
+    perfect_comps_by_pop = {i: set() for i in range(4, 14)}
     combinations = []
     
     all_champs = list(champions.keys())
     
-    for pop in range(4, 11):
+    for pop in range(4, 14):
         if pop <= 3:
             valid_seeds = [c for c, d in champions.items() if d['cost'] <= 3]
         elif pop <= 6:
@@ -168,9 +168,13 @@ def run():
                 is_perfect = False
                 
                 # Check if the board is perfect
-                if len(unfixable) == 0 and len(needed_emblems) <= 3:
+                # Max native pop is 10 for S17
+                extra_pop = max(0, pop - 10)
+                total_emblems = len(needed_emblems) + extra_pop
+                if len(unfixable) == 0 and total_emblems <= 3:
                     is_perfect = True
                     emblems_used.extend(needed_emblems)
+                    emblems_used.extend(['+1 人口'] * extra_pop)
                     
                 if is_perfect:
                     comp_tuple = tuple(sorted(list(board)))
