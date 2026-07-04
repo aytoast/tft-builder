@@ -1,0 +1,16 @@
+{
+  "stat_weights": {
+    "ehp_baseline": 1050.0,
+    "dps_baseline": 55.0,
+    "armor_mitigation_factor": 120.0,
+    "mr_mitigation_factor": 120.0,
+    "carry_cost_multiplier_4": 1.15,
+    "carry_cost_multiplier_5": 1.25
+  },
+  "trait_multipliers": {},
+  "synergy_bonus": {
+    "balanced_team_mult": 1.2,
+    "unbalanced_team_mult": 0.7,
+    "dead_trait_penalty": 6
+  }
+}

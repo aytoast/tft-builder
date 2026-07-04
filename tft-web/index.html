@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>云顶之弈阵容探索</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <aside class="sidebar glass">
+        <div class="sidebar-header">
+          <h2>筛选器</h2>
+          <button id="clear-filters" class="btn-clear" style="display: none;">清空全部</button>
+        </div>
+        <div class="filter-section">
+          <h3>羁绊</h3>
+          <div class="search-input-wrapper">
+          <h3>羁绊 (多选)</h3>
+          <div class="search-input-wrapper">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" class="search-input" id="trait-search" placeholder="搜索羁绊...">
+          </div>
+          <div class="checkbox-grid" id="trait-filters"></div>
+        </div>
+        
+        <div class="filter-section">
+          <h3>纹章加持 (Emblems)</h3>
+          <div class="checkbox-grid" id="emblem-filters"></div>
+        </div>
+        <div class="filter-section">
+          <h3>奕子</h3>
+          <div class="search-input-wrapper">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="champ-search" class="search-input" placeholder="搜索奕子..." aria-label="搜索奕子">
+          </div>
+          <div id="champ-filters" class="checkbox-grid"></div>
+        </div>
+      </aside>
+      <main class="content">
+        <header class="main-header">
+          <div class="header-top">
+            <div class="season-tabs">
+              <button class="season-tab active" data-season="8">Set 8: 怪兽来袭</button>
+              <button class="season-tab" data-season="17">Set 17: 当前赛季</button>
+            </div>
+            <div>
+              <h1 id="main-title">9人口阵容库 (Set 8)</h1>
+              <p id="result-count">正在加载阵容...</p>
+            </div>
+            <div class="sort-controls">
+              <button id="toggle-starred" class="toggle-starred" aria-label="仅看收藏">
+                <span>★</span> 仅看收藏
+              </button>
+              <label for="sort-select">排序:</label>
+              <select id="sort-select">
+                <option value="cost-desc">花费 (高→低)</option>
+                <option value="cost-asc">花费 (低→高)</option>
+                <option value="population-desc">人口 (多→少)</option>
+                <option value="population-asc">人口 (少→多)</option>
+              </select>
+            </div>
+          </div>
+          <div id="pop-filter-container" class="pop-filter-container">
+            <span class="pop-filter-label">人口阶段:</span>
+            <div id="pop-filters" class="pop-filters">
+              <button class="pop-btn active" data-pop="all">全部</button>
+              <button class="pop-btn" data-pop="10">10</button>
+              <button class="pop-btn" data-pop="9">9</button>
+              <button class="pop-btn" data-pop="8">8</button>
+              <button class="pop-btn" data-pop="7">7</button>
+              <button class="pop-btn" data-pop="6">6</button>
+              <button class="pop-btn" data-pop="5">5</button>
+              <button class="pop-btn" data-pop="4">4</button>
+            </div>
+          </div>
+          <div id="active-filters" class="active-filters"></div>
+        </header>
+        <div id="combinations-container">
+          <!-- Pop headers and grids injected here -->
+        </div>
+        <div id="load-more-sentinel" style="height: 40px; margin: 20px 0; display: none;"></div>
+      </main>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

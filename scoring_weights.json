@@ -1,0 +1,42 @@
+{
+  "stat_weights": {
+    "ehp_baseline": 1050.0,
+    "dps_baseline": 55.0,
+    "armor_mitigation_factor": 120.0,
+    "mr_mitigation_factor": 120.0,
+    "carry_cost_multiplier_4": 1.15,
+    "carry_cost_multiplier_5": 1.25
+  },
+  "trait_multipliers": {
+    "斗士": {"ehp_mult": 1.35, "dps_mult": 1.0},
+    "护卫": {"ehp_mult": 1.25, "dps_mult": 1.0},
+    "秘术卫士": {"ehp_mult": 1.30, "dps_mult": 1.0},
+    "战斗机甲": {"ehp_mult": 1.15, "dps_mult": 1.15},
+    "吉祥物": {"ehp_mult": 1.25, "dps_mult": 1.0},
+    "决斗大师": {"ehp_mult": 1.0, "dps_mult": 1.45},
+    "强袭枪手": {"ehp_mult": 1.0, "dps_mult": 1.30},
+    "情报特工": {"ehp_mult": 1.0, "dps_mult": 1.20},
+    "灵能使": {"ehp_mult": 1.0, "dps_mult": 1.20},
+    "枪神": {"ehp_mult": 1.0, "dps_mult": 1.1},
+    "黑客": {"ehp_mult": 1.20, "dps_mult": 1.05},
+    "淘气包": {"ehp_mult": 1.1, "dps_mult": 1.0},
+    "幻灵战队": {"ehp_mult": 1.15, "dps_mult": 1.15},
+    "混沌战士": {"ehp_mult": 1.0, "dps_mult": 1.35},
+    "星之守护者": {"ehp_mult": 1.05, "dps_mult": 1.25},
+    "爱心使者": {"ehp_mult": 1.10, "dps_mult": 1.25},
+    "福牛守护者": {"ehp_mult": 1.25, "dps_mult": 1.35},
+    "超级英雄": {"ehp_mult": 1.0, "dps_mult": 1.35},
+    "源计划：激光特工": {"ehp_mult": 1.0, "dps_mult": 1.25},
+    "AI程序": {"ehp_mult": 1.10, "dps_mult": 1.15},
+    "平民英雄": {"ehp_mult": 1.10, "dps_mult": 1.25},
+    "小天才": {"ehp_mult": 1.20, "dps_mult": 1.20},
+    "气象主播": {"ehp_mult": 1.15, "dps_mult": 1.15},
+    "枪神": {"ehp_mult": 1.0, "dps_mult": 1.15},
+    "堕落使者": {"ehp_mult": 1.0, "dps_mult": 1.20}
+  },
+  "synergy_bonus": {
+    "balanced_team_mult": 1.2,
+    "unbalanced_team_mult": 0.70,
+    "dead_trait_penalty": 6
+  }
+}
