@@ -45,7 +45,8 @@ function initBuilder() {
             matches.forEach(c => {
                 const div = document.createElement('div');
                 div.className = 'search-result-item';
-                div.innerHTML = <img src="https://cdn.metatft.com/file/metatft/champions/tft_.png" onerror="this.src='/placeholder.png'"><span></span>;
+                const imgUrl = window.allData.champDict[c].imgUrl || '/placeholder.png';
+                div.innerHTML = `<img src="${imgUrl}" onerror="this.src='/placeholder.png'"><span>${c}</span>`;
                 div.addEventListener('click', () => {
                     addChampionToBoard(c);
                     searchInput.value = '';
@@ -92,11 +93,11 @@ function renderBuilderSlots() {
         if (i < builderBoard.length) {
             const champ = builderBoard[i];
             slot.classList.add('filled');
-            const imgName = 	ft_.png;
-            slot.innerHTML = 
-                <img src="https://cdn.metatft.com/file/metatft/champions/" onerror="this.src='/placeholder.png'" title="">
-                <div class="remove-slot" onclick="removeChampionFromBoard()">×</div>
-            ;
+            const imgUrl = window.allData.champDict[champ].imgUrl || '/placeholder.png';
+            slot.innerHTML = `
+                <img src="${imgUrl}" onerror="this.src='/placeholder.png'" title="${champ}">
+                <div class="remove-slot" onclick="removeChampionFromBoard(${i})">×</div>
+            `;
         } else {
             slot.innerHTML = '<span style="color:rgba(255,255,255,0.2); font-size: 24px;">+</span>';
         }
@@ -158,17 +159,17 @@ function renderClosestComps(topComps) {
         const card = document.createElement('div');
         card.className = 'comp-match-card';
         
-        const traitNames = item.comp.traits.map(t => ${t.name} ).join(', ');
+        const traitNames = item.comp.traits.map(t => `${t.name}`).join(', ');
         const missing = item.comp.champions.filter(c => !builderBoard.includes(c));
         
-        card.innerHTML = 
+        card.innerHTML = `
             <div class="comp-match-header">
-                <strong></strong>
-                <span class="match-score">贴合度: %</span>
+                <strong>${window.generateComboName ? window.generateComboName(item.comp) : '组合'}</strong>
+                <span class="match-score">贴合度: ${(item.score * 100).toFixed(0)}%</span>
             </div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 5px;">进度:  / </div>
-            <div style="font-size: 12px;">缺少: </div>
-        ;
+            <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 5px;">进度: ${item.intersection} / ${item.total}</div>
+            <div style="font-size: 12px;">缺少: ${missing.join(', ')}</div>
+        `;
         container.appendChild(card);
     });
 }
@@ -225,16 +226,16 @@ function calculateAndRenderEVS(topComps, boardSet) {
     topRecs.forEach(rec => {
         const card = document.createElement('div');
         card.className = 'evs-card';
-        const imgName = 	ft_.png;
+        const imgUrl = window.allData.champDict[rec.champ].imgUrl || '/placeholder.png';
         
-        card.innerHTML = 
-            <img src="https://cdn.metatft.com/file/metatft/champions/" onerror="this.src='/placeholder.png'">
+        card.innerHTML = `
+            <img src="${imgUrl}" onerror="this.src='/placeholder.png'">
             <div class="evs-info">
-                <span class="evs-name" style="color: var(--cost-)"> (费)</span>
-                <span class="evs-reason">用于最贴合阵容 # | 刷新率: %</span>
+                <span class="evs-name" style="color: var(--cost-${rec.cost})">${rec.champ} (${rec.cost}费)</span>
+                <span class="evs-reason">用于最贴合阵容 #${rec.comps[0]} | 刷新率: ${rec.prob}%</span>
             </div>
-            <div class="evs-score"> 分</div>
-        ;
+            <div class="evs-score">${rec.evs.toFixed(0)} 分</div>
+        `;
         container.appendChild(card);
     });
 }
